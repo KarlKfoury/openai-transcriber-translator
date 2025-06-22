@@ -1,0 +1,30 @@
+<div class="container" (dragover)="onDragOver($event)" (dragleave)="onDragLeave($event)" (drop)="onDrop($event)">
+    <h1>Audio Transcription and Translation</h1>
+
+    <input type="file" id="audioFile" (change)="onFileSelected($event)" accept="audio/*" style="display: none;">
+    <label for="audioFile" class="drop-zone" [ngClass]="{'drag-over': isDragging}">
+        <p>Click or drag and drop an audio file here</p>
+    </label>
+
+    <div class="dropdown">
+        <label for="languageSelect">Select Language:</label>
+        <select id="languageSelect" [(ngModel)]="selectedLanguage">
+            <option *ngFor="let language of languages" [value]="language.code">{{ language.name }}</option>
+        </select>
+    </div>
+
+    <div class="text-field" *ngIf="selectedFile">
+        <label for="transcriptionField">Transcription:</label>
+        <div id="transcriptionField">{{ transcription }}</div>
+    </div>
+
+    <div class="text-field" *ngIf="selectedFile">
+        <label for="translationField">Translation:</label>
+        <div id="translationField">{{ translation }}</div>
+    </div>
+
+    <div *ngIf="selectedFile">
+        <h2>Selected File:</h2>
+        <p>{{ selectedFile.name }}</p>
+    </div>
+</div>
